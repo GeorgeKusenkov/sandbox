@@ -1,15 +1,29 @@
 fun main() {
 
-    val greetingFunction = { playerName: String, numBuildings:Int ->
-        val currentYear =2021
-        println("Adding $numBuildings houses")
-        "Welcome to SimVillage, $playerName! (copyright $currentYear)"
-    }
+//    val greetingFunction = { playerName: String, numBuildings:Int ->
+//
+//    }
 
-    runSimulation("Gual", greetingFunction)
+    runSimulation()
 }
 
-fun runSimulation(playerName: String, greetingFunction: (String, Int) -> String) {
-    val numBuildings = (1..3).shuffled().last()
-    println(greetingFunction(playerName, numBuildings))
+fun runSimulation() {
+    val greetingFunction = configureGreetingFunction()
+    println(greetingFunction("Gual"))
+}
+
+fun printConstructionCost(numBuildings: Int) {
+    val cost = 500
+    println("construction cost: ${cost * numBuildings}")
+}
+
+fun configureGreetingFunction (): (String) -> String {
+    val structureType = "hospitals"
+    var numBuildings = 5
+    return { playerName: String ->
+        val currentYear =2021
+        numBuildings += 1
+        println("Adding $numBuildings $structureType")
+        "Welcome to SimVillage, $playerName! (copyright $currentYear)"
+    }
 }
